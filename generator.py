@@ -1,3 +1,7 @@
+import torch
+import torch.nn as nn
+import wav2clip
+
 class Music2ImageGenerator(nn.Module):
     def __init__(self, embedding_dim= 512):
         super().__init__()
@@ -15,6 +19,4 @@ class Music2ImageGenerator(nn.Module):
     def forward(self, batch_audio):
         embedded = torch.stack([torch.tensor(wav2clip.embed_audio(audio, self.embedding)).reshape((-1, )) for audio in batch_audio])
         embedded = embedded.view(embedded.size(0), embedded.size(1), 1, 1)
-        print(embedded[0].shape)
-        print(self.test(embedded[0]).shape)
         return self.deconv(embedded)

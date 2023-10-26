@@ -1,3 +1,7 @@
+import torch
+import torch.nn as nn
+from tqdm import tqdm
+
 def train(epoch, train_loader, generator, discriminator, optimizer_G, optimizer_D, criterion):
     generator.train()
     discriminator.train()
