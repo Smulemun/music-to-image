@@ -15,7 +15,10 @@
     Creating art from music through generative AI.
     <br />
     <a href="https://github.com/Smulemun/music-to-image"><strong>Explore the docs »</strong></a>
+     ·
+    <a href="https://colab.research.google.com/drive/199nn2sm1YJcS95qzUr7R3fi69Qn-vsON?usp=sharing"><strong>View Demo »</strong></a>
     <br />
+  </p>
   </p>
 </div>
 
