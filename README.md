@@ -30,7 +30,14 @@
       <a href="#model-architecture">Model Architecture</a>
       <ul>
         <li><a href="#clip-sound-embeddings">CLIP sound embeddings</a></li>
-        <li><a href="#conditional-gan-architecture">GAN architecture</a></li>
+        <li><a href="#wav2clip">wav2CLIP</a></li>
+        <li>
+          <a href="#conditional-gan-architecture">GAN architecture</a>
+          <ul>
+            <li><a href="#generator-architecture">Generator Architecture</a></li>
+            <li><a href="#discriminator-architecture">Discriminator Architecture</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
      <li><a href="#license">License</a></li>
@@ -51,15 +58,19 @@ The project's goal is to convert music into visual artwork using advanced techni
 
 The critical idea behind CLIP is that semantically similar text and images are placed closer together in this shared high-dimensional space. As a result, you can compare the embeddings of text and images to measure their similarity or dissimilarity. CLIP embeddings enable a wide range of applications, such as image retrieval based on textual queries, zero-shot classification, and more, by understanding the relationships between textual and visual information.
 
+### wav2CLIP 
+
+[wav2CLIP](https://github.com/descriptinc/lyrebird-wav2clip) is a robust audio representation learning method by distilling from Contrastive Language-Image Pre-training (CLIP). We use this library to build music CLIP embeddings for our dataset.
+
 ### Conditional GAN architecture
 
 ![](https://miro.medium.com/v2/resize:fit:1400/1*yO9fLGCR9mOgTVWUKiYQSQ.png)
 
-Generator Architecture:
+#### Generator Architecture:
 
 The Music2ImageGenerator converts music and random noise into images using five convolutional blocks. It applies transposed convolution to upsample the data, gradually reducing spatial dimensions and increasing channel count. Leaky ReLU activation functions introduce non-linearity, and the final block uses hyperbolic tangent activation to output the image. Batch normalization is used in all blocks except the last one.
 
-Discriminator Architecture:
+#### Discriminator Architecture:
 
 The FakeImageDiscriminator determines image authenticity. It consists of five convolutional blocks followed by a fully connected layer. The convolutional layers downsample the image, increasing channel count and applying ReLU activation. The last block uses a larger kernel size and no batch normalization. The output is flattened and fed into a fully connected layer, followed by a sigmoid activation to classify the image as real or fake. This architecture is common in GANs for image discrimination.
 
