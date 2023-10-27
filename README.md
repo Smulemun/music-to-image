@@ -52,9 +52,9 @@ The critical idea behind CLIP is that semantically similar text and images are p
 
 ### GAN architecture
 
-Generator Architecture:
-
 ![](https://miro.medium.com/v2/resize:fit:1400/1*yO9fLGCR9mOgTVWUKiYQSQ.png)
+
+Generator Architecture:
 
 The Music2ImageGenerator is designed to convert music and random noise into images. It comprises a sequence of five convolutional blocks. The first block takes a concatenated input of the random noise and music, reshapes it into a 4D tensor, and applies transposed convolution (also known as deconvolution) to upsample the data. The subsequent blocks continue this process, gradually reducing the spatial dimensions while increasing the number of channels. Leaky ReLU activation functions are applied after each convolutional layer to introduce non-linearity. The final block uses a hyperbolic tangent (tanh) activation function to output the generated image. Batch normalization is used in all blocks except the last one.
 
