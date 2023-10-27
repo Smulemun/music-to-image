@@ -1,3 +1,7 @@
+![Static Badge](https://img.shields.io/badge/CONTRIBUTORS-3-red?link=https%3A%2F%2Fgithub.com%2FSmulemun%2Fmusic-to-image%2Fgraphs%2Fcontributors)
+![Static Badge](https://img.shields.io/badge/LICENSE-MIT-green?link=https%3A%2F%2Fgithub.com%2FSmulemun%2Fmusic-to-image%2Fblob%2Fmain%2FLICENSE)
+
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -22,8 +26,54 @@
     <li>
       <a href="#about-the-project">About The Project</a>
     </li>
+    <li>
+      <a href="#model-architecture">Model Architecture</a>
+      <ul>
+        <li><a href="#clip-sound-embeddings">CLIP sound embeddings</a></li>
+        <li><a href="#wav2clip">wav2CLIP</a></li>
+        <li>
+          <a href="#conditional-gan-architecture">GAN architecture</a>
+          <ul>
+            <li><a href="#generator-architecture">Generator Architecture</a></li>
+            <li><a href="#discriminator-architecture">Discriminator Architecture</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+     <li><a href="#license">License</a></li>
   </ol>
 </details>
 
+<!-- ABOUT -->
 ## About the project
 The project's goal is to convert music into visual artwork using advanced techniques, enhancing the creative intersection of audio and visual domains. To achieve this, we use CLIP sound embeddings and a self-trained GAN as our image generator
+
+<!-- MODEL -->
+## Model Architecture
+
+### CLIP sound embeddings
+[CLIP](https://openai.com/research/clip) is a deep learning model developed by [OpenAI](https://openai.com/) that is capable of understanding and associating images and text in a semantically meaningful way. It leverages a powerful vision model and a language model trained jointly on a large corpus of text and images.
+
+![](https://production-media.paperswithcode.com/methods/3d5d1009-6e3d-4570-8fd9-ee8f588003e7.png)
+
+The critical idea behind CLIP is that semantically similar text and images are placed closer together in this shared high-dimensional space. As a result, you can compare the embeddings of text and images to measure their similarity or dissimilarity. CLIP embeddings enable a wide range of applications, such as image retrieval based on textual queries, zero-shot classification, and more, by understanding the relationships between textual and visual information.
+
+### wav2CLIP 
+
+[wav2CLIP](https://github.com/descriptinc/lyrebird-wav2clip) is a robust audio representation learning method by distilling from Contrastive Language-Image Pre-training (CLIP). We use this library to build music CLIP embeddings for our dataset.
+
+### Conditional GAN architecture
+
+![](https://miro.medium.com/v2/resize:fit:1400/1*yO9fLGCR9mOgTVWUKiYQSQ.png)
+
+#### Generator Architecture:
+
+The Music2ImageGenerator converts music and random noise into images using five convolutional blocks. It applies transposed convolution to upsample the data, gradually reducing spatial dimensions and increasing channel count. Leaky ReLU activation functions introduce non-linearity, and the final block uses hyperbolic tangent activation to output the image. Batch normalization is used in all blocks except the last one.
+
+#### Discriminator Architecture:
+
+The FakeImageDiscriminator determines image authenticity. It consists of five convolutional blocks followed by a fully connected layer. The convolutional layers downsample the image, increasing channel count and applying ReLU activation. The last block uses a larger kernel size and no batch normalization. The output is flattened and fed into a fully connected layer, followed by a sigmoid activation to classify the image as real or fake. This architecture is common in GANs for image discrimination.
+
+<!-- LICENSE -->
+## License
+Distributed under the MIT License. See `LICENSE` for more information.
