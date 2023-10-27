@@ -3,7 +3,7 @@ import torch.nn as nn
 from tqdm import tqdm
 import numpy as np
 
-def evaluate(epoch, val_loader, generator, discriminator, criterion):
+def evaluate(epoch, val_loader, generator, discriminator, criterion, device, real_label, fake_label):
     generator.eval()
     discriminator.eval()
 
@@ -12,19 +12,19 @@ def evaluate(epoch, val_loader, generator, discriminator, criterion):
 
     D_accuracies = []
 
-    pbar = tqdm(val_loader, desc=f'Validation Epoch {epoch}')
+    pbar = tqdm(val_loader)
     with torch.no_grad():
         for music, image in pbar:
 
             music = music.to(device)
-            image = image.to(device)
+            image = image.to(device).to(torch.float32) # !!!!!!!
 
             # Evaluate discriminator on real images
             D_real_output = discriminator(image)
             D_real_loss = criterion(D_real_output, real_label)
 
             # Evaluate discriminator on fake images
-            noise = torch.randn(BATCH_SIZE, dim).to(device)
+            noise = torch.randn(music.size(0), 512).to(device)
             fake_images = generator(noise, music)
             D_fake_output = discriminator(fake_images.detach())
 
@@ -41,6 +41,6 @@ def evaluate(epoch, val_loader, generator, discriminator, criterion):
             G_loss = criterion(D_fake_output, real_label)
             G_losses.append(G_loss.item())
 
-            pbar.set_postfix(f'\n\tGenerator Loss: {np.mean(G_losses):.5f}\n\tDiscriminator Loss: {np.mean(D_losses):.5f}\n\tDiscriminator Accuracy: {np.mean(D_accuracies):.5f}')
+            pbar.set_description(f'\tValidation Epoch {epoch}, Generator Loss: {np.mean(G_losses):.5f}, Discriminator Loss: {np.mean(D_losses):.5f}, Discriminator Accuracy: {np.mean(D_accuracies):.5f}')
 
     return np.mean(G_losses), np.mean(D_losses)
