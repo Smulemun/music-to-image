@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 model_url = 'https://github.com/Smulemun/music-to-image/releases/download/model/diffusion_model_100.pth'
 model_path = 'diffusion_model_100.pth'
 
+st.write(device = "cuda" if torch.cuda.is_available() else "cpu")
+
 @st.cache_data
 def load_model():
     st.write('Downloading model...')
