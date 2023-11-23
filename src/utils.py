@@ -25,7 +25,7 @@ def postprocess_image(image):
 
 def embed_audio(audio_path, model):
     audio, sr = a2n.audio_from_file(audio_path)
-    if audio.shape[0] > 1:
+    if len(audio.shape) > 1:
         audio = audio[:, 0]
     audio_embedding = w2c.embed_audio(audio, model)
     audio_embedding = torch.tensor(np.squeeze(audio_embedding))
