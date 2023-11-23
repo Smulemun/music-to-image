@@ -4,10 +4,7 @@ import cv2
 from tqdm import tqdm
 import wav2clip as w2c
 import numpy as np
-
-IMAGE_PATH = 'data/images/'
-MUSIC_PATH = 'data/music/'
-IMAGE_SIZE = 64
+from utils import IMAGE_PATH, MUSIC_PATH, IMAGE_SIZE
 
 class MusicImageDataset(Dataset):
     def __init__(self, dataframe):
@@ -35,7 +32,10 @@ class MusicImageDataset(Dataset):
     def _read_img(self, image_path):
         image = cv2.imread(image_path)
         resized = cv2.resize(image, (IMAGE_SIZE, IMAGE_SIZE))
-        return cv2.cvtColor(resized, cv2.COLOR_BGR2RGB).reshape(3, IMAGE_SIZE, IMAGE_SIZE)
+        result = cv2.cvtColor(resized, cv2.COLOR_BGR2RGB).transpose(2, 0, 1) / 255.0
+        result = (result * 2) - 1
+        result = result.astype(np.float32)
+        return result
 
     def _read_audio(self, audio_path):
         audio, sr = a2n.audio_from_file(audio_path)
