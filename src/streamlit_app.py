@@ -5,12 +5,19 @@ from utils import embed_audio
 import urllib.request
 
 model_url = 'https://github.com/Smulemun/music-to-image/releases/download/model/diffusion_model_100e.pth'
-model_path = 'models/diffusion_model_100.pth'
+model_path = 'diffusion_model_100.pth'
 
-urllib.request.urlretrieve(model_url, model_path)
+@st.cache_resource
+def load_model():
+    print('Downloading model...')
+    urllib.request.urlretrieve(model_url, model_path)
+    print('Model downloaded')
+    model = SimpleUnet()
+    model.load_state_dict(torch.load(model_path))
+    model.eval()
+    return model
 
-model = SimpleUnet()
-model.load_state_dict(torch.load(model_path))
+model = load_model()
 
 st.title('Music to Image Generator')
 
@@ -18,6 +25,7 @@ uploaded_file = st.file_uploader('Choose an audio file (currently only wav is su
 if uploaded_file is not None:
     st.audio(uploaded_file, format='audio/wav')
     st.write('Generating images...')
+    print('Generating images...')
     audio = uploaded_file.getvalue()
 
     audio_path = 'tmp.wav'
