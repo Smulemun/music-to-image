@@ -16,7 +16,7 @@
     <br />
     <a href="https://github.com/Smulemun/music-to-image"><strong>Explore the docs »</strong></a>
      ·
-    <a href="https://colab.research.google.com/drive/1b6Zs4r54xRtrCWzhdewrC2Vpu5qG1wsu?usp=sharing"><strong>View Demo »</strong></a>
+    <a href="https://music2image.streamlit.app/"><strong>View Demo »</strong></a>
     <br />
   </p>
   </p>
