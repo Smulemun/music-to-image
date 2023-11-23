@@ -2,9 +2,15 @@ import streamlit as st
 import torch
 from diffusion_model import SimpleUnet, get_image
 from utils import embed_audio
+import urllib.request
+
+model_url = 'https://github.com/Smulemun/music-to-image/releases/download/model/diffusion_model_100e.pth'
+model_path = 'models/diffusion_model_100.pth'
+
+urllib.request.urlretrieve(model_url, model_path)
 
 model = SimpleUnet()
-model.load_state_dict(torch.load('models/diffusion_model_100.pth'))
+model.load_state_dict(torch.load(model_path))
 
 st.title('Music to Image Generator')
 
