@@ -13,7 +13,7 @@ def load_model():
     urllib.request.urlretrieve(model_url, model_path)
     print('Model downloaded')
     model = SimpleUnet()
-    model.load_state_dict(torch.load(model_path))
+    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     model.eval()
     return model
 
