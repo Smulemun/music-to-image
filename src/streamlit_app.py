@@ -7,23 +7,23 @@ import wav2clip as w2c
 import matplotlib.pyplot as plt
 
 model_url = 'https://github.com/Smulemun/music-to-image/releases/download/model/diffusion_model_100.pth'
-model_path = 'models/diffusion_model_100.pth'
+model_path = 'diffusion_model_100.pth'
 
 @st.cache_data
 def load_model():
-    print('Downloading model...')
+    st.write('Downloading model...')
     urllib.request.urlretrieve(model_url, model_path)
-    print('Model downloaded')
+    st.write('Model downloaded')
     model = SimpleUnet()
-    model.load_state_dict(torch.load('models/diffusion_model_100.pth'))
+    model.load_state_dict(torch.load(model_path))
     return model
 
 # def load wav2clip model
 @st.cache_data
 def load_wav2clip_model():
-    print('Downloading model...')
+    st.write('Downloading CLIP model...')
     w2c_model = w2c.get_model() 
-    print('Model downloaded')
+    st.write('CLIP model downloaded')
     return w2c_model
 
 w2c_model = load_wav2clip_model()
