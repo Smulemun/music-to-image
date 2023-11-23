@@ -48,7 +48,7 @@ if uploaded_file is not None:
     columns = st.columns([1, 1], gap='medium')
 
     for i in range(10):
-        image = get_image(model, audio_embedding, 'cuda')
+        image = get_image(model, audio_embedding, 'cpu')
         with columns[i % len(columns)]:
             st.image(image, caption=f'Generated image {i+1}', width=256)
     
