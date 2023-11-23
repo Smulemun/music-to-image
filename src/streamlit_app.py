@@ -17,7 +17,7 @@ def load_model():
     urllib.request.urlretrieve(model_url, model_path)
     st.write('Model downloaded')
     model = SimpleUnet()
-    model.load_state_dict(torch.load(model_path))
+    model.load_state_dict(torch.load(model_path, map_location='cpu'))
     return model
 
 # def load wav2clip model
