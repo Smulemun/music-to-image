@@ -1,6 +1,6 @@
-torch==2.0.1+cu118
+torch
 audio2numpy==0.1.2
 numpy==1.24.3
 matplotlib-inline==0.1.6
-torchvision==0.15.2+cu118
+torchvision
 wav2clip==0.1.0
