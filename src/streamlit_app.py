@@ -4,7 +4,7 @@ from diffusion_model import SimpleUnet, get_image
 from utils import embed_audio
 import urllib.request
 
-model_url = 'https://github.com/Smulemun/music-to-image/releases/download/model/diffusion_model_100e.pth'
+model_url = 'https://github.com/Smulemun/music-to-image/releases/download/model/diffusion_model_100.pth'
 model_path = 'diffusion_model_100.pth'
 
 @st.cache_resource
