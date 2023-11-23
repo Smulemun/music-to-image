@@ -8,7 +8,6 @@ IMAGE_PATH = '../data/images/'
 MUSIC_PATH = '../data/music/'
 IMAGE_SIZE = 128
 
-w2c_model = w2c.get_model() 
 
 def postprocess_image(image):
     image = image.cpu()
@@ -24,10 +23,10 @@ def postprocess_image(image):
         
     return reverse_transforms(image)
 
-def embed_audio(audio_path):
+def embed_audio(audio_path, model):
     audio, sr = a2n.audio_from_file(audio_path)
     if audio.shape[0] > 1:
         audio = audio[:, 0]
-    audio_embedding = w2c.embed_audio(audio, w2c_model)
+    audio_embedding = w2c.embed_audio(audio, model)
     audio_embedding = torch.tensor(np.squeeze(audio_embedding))
     return audio_embedding
