@@ -167,7 +167,7 @@ def sample_plot_image(model, music, device, num_images=10):
 
 
 @torch.no_grad()
-def get_image(model, music, device='cuda'):
+def get_image(model, music, device='cpu'):
     music = music.to(device)
     model = model.to(device)
     img_size = IMAGE_SIZE
