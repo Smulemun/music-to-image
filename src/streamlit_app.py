@@ -9,23 +9,16 @@ import matplotlib.pyplot as plt
 model_url = 'https://github.com/Smulemun/music-to-image/releases/download/model/diffusion_model_100.pth'
 model_path = 'diffusion_model_100.pth'
 
-st.write("cuda" if torch.cuda.is_available() else "cpu")
-
 @st.cache_data
 def load_model():
-    st.write('Downloading model...')
     urllib.request.urlretrieve(model_url, model_path)
-    st.write('Model downloaded')
     model = SimpleUnet()
     model.load_state_dict(torch.load(model_path, map_location='cpu'))
     return model
 
-# def load wav2clip model
 @st.cache_data
 def load_wav2clip_model():
-    st.write('Downloading CLIP model...')
     w2c_model = w2c.get_model() 
-    st.write('CLIP model downloaded')
     return w2c_model
 
 w2c_model = load_wav2clip_model()
