@@ -49,7 +49,7 @@
 
 <!-- ABOUT -->
 ## About the project
-The project's goal is to convert music into visual artwork using advanced techniques, enhancing the creative intersection of audio and visual domains. To achieve this, we use CLIP sound embeddings and a self-trained GAN as our image generator
+The project's goal is to convert music into visual artwork using advanced techniques, enhancing the creative intersection of audio and visual domains. To achieve this, we use CLIP sound embeddings and a self-trained Diffusion Model as our image generator
 
 <!-- MODEL -->
 ## Model Architecture
